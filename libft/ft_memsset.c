@@ -6,7 +6,7 @@
 /*   By: altikka & emende                           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 13:56:24 by altikka           #+#    #+#             */
-/*   Updated: 2021/12/22 18:15:24 by altikka          ###   ########.fr       */
+/*   Updated: 2021/12/22 19:50:58 by altikka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,21 +21,22 @@ void	*ft_memsset(void *b, int c, size_t len)
 		return (ft_memset(b, c, len));
 	ptr = b;
 	ft_memset((void *) arr, c, sizeof(long));
-	while (len >= sizeof(long) * 4)
+	while (len >= sizeof(long))
 	{
-		*(long *) ptr++ = *(long *) arr;
-		*(long *) ptr++ = *(long *) arr;
-		*(long *) ptr++ = *(long *) arr;
-		*(long *) ptr++ = *(long *) arr;
-		len -= sizeof(long) * 4;
+		*(long *) ptr = *(long *) arr;
+		ptr += sizeof(long);
+		len -= sizeof(long);
 	}
-	while (len >= sizeof(int))
+	if (len >= sizeof(int))
 	{
 		*(int *) ptr = *(int *) arr;
 		ptr += sizeof(int);
 		len -= sizeof(int);
 	}
-	while (len-- > 0)
+	while (len > 0)
+	{
 		*(unsigned char *) ptr++ = (unsigned char ) c;
+		len--;
+	}
 	return (b);
 }
