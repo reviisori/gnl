@@ -6,7 +6,7 @@
 /*   By: altikka <altikka@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/02 17:46:38 by altikka           #+#    #+#             */
-/*   Updated: 2021/12/22 14:03:04 by altikka          ###   ########.fr       */
+/*   Updated: 2021/12/23 13:30:12 by altikka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ char	*ft_strrchr(char const *s, int c);
 char	*ft_strstr(char const *haystack, char const *needle);
 char	*ft_strnstr(char const *haystack, char const *needle, size_t len);
 void	*ft_memset(void *b, int c, size_t len);
-void	*ft_memsset(void *b, int c, size_t len);
 void	ft_bzero(void *s, size_t n);
 void	*ft_memcpy(void *dst, void const *src, size_t n);
 void	*ft_memccpy(void *dst, void const *src, int c, size_t n);

@@ -6,7 +6,7 @@
 /*   By: altikka <altikka@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/12 16:39:54 by altikka           #+#    #+#             */
-/*   Updated: 2021/12/16 14:36:38 by altikka          ###   ########.fr       */
+/*   Updated: 2021/12/23 13:38:45 by altikka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,29 @@
 
 void	*ft_memcpy(void *dst, void const *src, size_t n)
 {
-	size_t	i;
+	void	*ptr;
 
 	if (!dst && !src)
 		return (dst);
-	i = 0;
-	while (i < n)
+	ptr = dst;
+	while (n >= sizeof(long))
 	{
-		((unsigned char *) dst)[i] = ((unsigned char *) src)[i];
-		i++;
+		*(long *) ptr = *(long const *) src;
+		ptr += sizeof(long);
+		src += sizeof(long);
+		n -= sizeof(long);
+	}
+	while (n >= sizeof(int))
+	{
+		*(int *) ptr = *(int const *) src;
+		ptr += sizeof(int);
+		src += sizeof(int);
+		n -= sizeof(int);
+	}
+	while (n > 0)
+	{
+		*(unsigned char *) ptr++ = *(unsigned char const *) src++;
+		n--;
 	}
 	return (dst);
 }

@@ -6,7 +6,7 @@
 #    By: altikka <altikka@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/08 13:27:42 by altikka           #+#    #+#              #
-#    Updated: 2021/12/22 14:04:19 by altikka          ###   ########.fr        #
+#    Updated: 2021/12/23 13:30:27 by altikka          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,7 @@ SRCS = ft_putchar.c ft_putstr.c ft_putendl.c ft_putnbr.c ft_strlen.c \
 		ft_putendl_fd.c ft_putnbr_fd.c ft_lstnew.c ft_lstdelone.c ft_lstdel.c \
 		ft_lstadd.c ft_lstiter.c ft_lstmap.c ft_strndup.c ft_strnchr.c \
 		ft_intlen.c ft_abs.c ft_strcasechr.c ft_strncasecmp.c ft_strcasestr.c \
-		ft_isspace.c ft_strrev.c ft_memsset.c
+		ft_isspace.c ft_strrev.c
 
 INCS = includes/
 
@@ -44,7 +44,7 @@ OBJS = ft_putchar.o ft_putstr.o ft_putendl.o ft_putnbr.o ft_strlen.o \
 		ft_putendl_fd.o ft_putnbr_fd.o ft_lstnew.o ft_lstdelone.o ft_lstdel.o \
 		ft_lstadd.o ft_lstiter.o ft_lstmap.o ft_strndup.o ft_strnchr.o \
 		ft_intlen.o ft_abs.o ft_strcasechr.o ft_strncasecmp.o ft_strcasestr.o \
-		ft_isspace.o ft_strrev.o ft_memsset.o
+		ft_isspace.o ft_strrev.o
 
 FLGS = -Wall -Wextra -Werror -Wconversion
 
