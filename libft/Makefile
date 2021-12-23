@@ -6,7 +6,7 @@
 #    By: altikka <altikka@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/08 13:27:42 by altikka           #+#    #+#              #
-#    Updated: 2021/12/23 13:30:27 by altikka          ###   ########.fr        #
+#    Updated: 2021/12/23 13:54:46 by altikka          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,7 +46,7 @@ OBJS = ft_putchar.o ft_putstr.o ft_putendl.o ft_putnbr.o ft_strlen.o \
 		ft_intlen.o ft_abs.o ft_strcasechr.o ft_strncasecmp.o ft_strcasestr.o \
 		ft_isspace.o ft_strrev.o
 
-FLGS = -Wall -Wextra -Werror -Wconversion
+FLGS = -Wall -Wextra -Werror
 
 all: $(NAME)
 
