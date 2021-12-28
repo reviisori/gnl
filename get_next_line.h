@@ -6,7 +6,7 @@
 /*   By: altikka <altikka@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/17 14:02:05 by altikka           #+#    #+#             */
-/*   Updated: 2021/12/22 15:34:06 by altikka          ###   ########.fr       */
+/*   Updated: 2021/12/28 15:01:11 by altikka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@
 # include "./libft/libft.h"
 # include <fcntl.h>
 
-# define BUFF_SIZE	42
-# define FD_SIZE	4096
+# define BUFF_SIZE	4
+# define FD_SIZE	256
 
 int		get_next_line(int const fd, char **line);
 

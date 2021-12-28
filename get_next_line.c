@@ -6,35 +6,62 @@
 /*   By: altikka <altikka@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/17 15:43:17 by altikka           #+#    #+#             */
-/*   Updated: 2021/12/22 18:18:26 by altikka          ###   ########.fr       */
+/*   Updated: 2021/12/28 14:54:13 by altikka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-static int	ft_read_buffer(int const fd, char **line, arr[FD_SIZE], char *temp)
+static void	ft_linecat(char **line, char *buf)
+{
+	char	*join;
+
+	join = ft_strjoin(*line, buf);
+	free(*line);
+	*line = join;
+}
+
+static int	ft_read_buffer(int const fd, char **line, char **arr, char *temp)
 {
 	char	buf[BUFF_SIZE + 1];
 
-
+	ft_bzero(buf, BUFF_SIZE + 1);
+	while (read(fd, buf, BUFF_SIZE) > 0)
+	{
+		temp = ft_strchr(buf, '\n');
+		if (temp != NULL)
+		{
+			ft_linecat(line, buf);
+			temp++;
+			arr[fd] = ft_strdup(temp);
+			return (1);
+		}
+		if (*line == NULL)
+			*line = ft_strdup(buf);
+		else
+			ft_linecat(line, buf);
+		free(temp);
+		ft_bzero(buf, BUFF_SIZE + 1);
+	}
+	if (*line == NULL || *line[0] == '\0')
+		return (0);
+	return (1);
 }
 
-static int	ft_scan_array(int const fd, char **line, char *arr[FD_SIZE])
+static int	ft_scan_array(int const fd, char **line, char **arr)
 {
 	char	*temp;
 
 	temp = NULL;
 	if (arr[fd] == NULL)
-	{
-		->
-	}
+		return (ft_read_buffer(fd, line, arr, temp));
 	temp = ft_strchr(arr[fd], '\n');
 	if (temp == NULL)
 	{
 		*line = ft_strdup(arr[fd]);
-		return (ft_rdbuf(fd, line, arr, temp));
+		return (ft_read_buffer(fd, line, arr, temp));
 	}
-	*line = ft_strndup(arr[fd], temp - arr[fd]);
+	*line = ft_strndup(arr[fd], (size_t)(temp - arr[fd]));
 	temp++;
 	arr[fd] = temp;
 	return (1);
@@ -44,7 +71,9 @@ int	get_next_line(int const fd, char **line)
 {
 	static char	*arr[FD_SIZE];
 
-	if (fd < 0 || fd > FT_SIZE || line != NULL)
+	if (read(fd, arr[0], 0) < 0)
+		return (-1);
+	if (fd < 0 || fd >= FD_SIZE || line == NULL || BUFF_SIZE <= 0)
 		return (-1);
 	*line = NULL;
 	return (ft_scan_array(fd, line, arr));
