@@ -6,7 +6,7 @@
 /*   By: altikka <altikka@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/17 15:43:17 by altikka           #+#    #+#             */
-/*   Updated: 2021/12/28 17:08:23 by altikka          ###   ########.fr       */
+/*   Updated: 2021/12/30 13:45:35 by altikka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ static int	ft_read_buffer(int const fd, char **line, char **arr, char *temp)
 		temp = ft_strchr(buf, '\n');
 		if (temp != NULL)
 		{
-			//here you idiot
 			temp[0] = '\0';
 			ft_linecat(line, buf);
 			temp++;
@@ -61,6 +60,7 @@ static int	ft_scan_array(int const fd, char **line, char **arr)
 	if (temp == NULL)
 	{
 		*line = ft_strdup(arr[fd]);
+		arr[fd][0] = 0;
 		return (ft_read_buffer(fd, line, arr, temp));
 	}
 	*line = ft_strndup(arr[fd], (size_t)(temp - arr[fd]));
