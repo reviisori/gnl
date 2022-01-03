@@ -6,24 +6,25 @@
 /*   By: altikka <altikka@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/17 15:43:17 by altikka           #+#    #+#             */
-/*   Updated: 2022/01/03 17:36:47 by altikka          ###   ########.fr       */
+/*   Updated: 2022/01/03 18:39:39 by altikka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-static void	ft_buffer_to_line(char **line, char *buf)
+static void	buffer_to_line(char **line, char *buf)
 {
 	char	*join;
 
 	join = ft_strjoin(*line, buf);
-	free(*line);
+	ft_strdel(line);
 	*line = join;
 }
 
-static int	ft_read_buffer(int const fd, char **line, char **arr, char *temp)
+static int	read_buffer(int const fd, char **line, char **arr)
 {
 	char	buf[BUFF_SIZE + 1];
+	char	*temp;
 
 	ft_bzero(buf, BUFF_SIZE + 1);
 	while (read(fd, buf, BUFF_SIZE) > 0)
@@ -32,7 +33,7 @@ static int	ft_read_buffer(int const fd, char **line, char **arr, char *temp)
 		if (temp != NULL)
 		{
 			temp[0] = '\0';
-			ft_buffer_to_line(line, buf);
+			buffer_to_line(line, buf);
 			temp++;
 			arr[fd] = ft_strdup(temp);
 			return (1);
@@ -40,8 +41,7 @@ static int	ft_read_buffer(int const fd, char **line, char **arr, char *temp)
 		if (*line == NULL)
 			*line = ft_strdup(buf);
 		else
-			ft_buffer_to_line(line, buf);
-		free(temp);
+			buffer_to_line(line, buf);
 		ft_bzero(buf, BUFF_SIZE + 1);
 	}
 	if (*line == NULL || *line[0] == '\0')
@@ -49,27 +49,24 @@ static int	ft_read_buffer(int const fd, char **line, char **arr, char *temp)
 	return (1);
 }
 
-static int	ft_scan_array(int const fd, char **line, char **arr)
+static int	check_array(int const fd, char **line, char **arr)
 {
 	char	*temp;
 	char	*next;
 
-	temp = NULL;
 	if (arr[fd] == NULL)
-		return (ft_read_buffer(fd, line, arr, temp));
+		return (read_buffer(fd, line, arr));
 	temp = ft_strchr(arr[fd], '\n');
 	if (temp == NULL)
 	{
 		*line = ft_strdup(arr[fd]);
-		arr[fd][0] = 0;
-		free(arr[fd]);
-		arr[fd] = NULL;
-		return (ft_read_buffer(fd, line, arr, temp));
+		ft_strdel(&arr[fd]);
+		return (read_buffer(fd, line, arr));
 	}
 	*line = ft_strndup(arr[fd], (size_t)(temp - arr[fd]));
 	temp++;
 	next = ft_strdup(temp);
-	free(arr[fd]);
+	ft_strdel(&arr[fd]);
 	arr[fd] = next;
 	return (1);
 }
@@ -80,8 +77,8 @@ int	get_next_line(int const fd, char **line)
 
 	if (read(fd, arr[0], 0) < 0)
 		return (-1);
-	if (fd < 0 || fd >= FD_SIZE || line == NULL || BUFF_SIZE <= 0)
+	if (fd < 0 || fd > FD_SIZE || line == NULL || BUFF_SIZE <= 0)
 		return (-1);
 	*line = NULL;
-	return (ft_scan_array(fd, line, arr));
+	return (check_array(fd, line, arr));
 }
