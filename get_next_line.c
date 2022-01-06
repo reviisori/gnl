@@ -6,7 +6,7 @@
 /*   By: altikka <altikka@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/17 15:43:17 by altikka           #+#    #+#             */
-/*   Updated: 2022/01/03 18:39:39 by altikka          ###   ########.fr       */
+/*   Updated: 2022/01/06 14:48:26 by altikka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ int	get_next_line(int const fd, char **line)
 
 	if (read(fd, arr[0], 0) < 0)
 		return (-1);
-	if (fd < 0 || fd > FD_SIZE || line == NULL || BUFF_SIZE <= 0)
+	if (fd < 0 || fd >= FD_SIZE || line == NULL || BUFF_SIZE <= 0)
 		return (-1);
 	*line = NULL;
 	return (check_array(fd, line, arr));
