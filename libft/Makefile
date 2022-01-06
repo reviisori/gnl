@@ -6,7 +6,7 @@
 #    By: altikka <altikka@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/08 13:27:42 by altikka           #+#    #+#              #
-#    Updated: 2021/12/23 13:54:46 by altikka          ###   ########.fr        #
+#    Updated: 2022/01/06 13:04:45 by altikka          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,7 +51,7 @@ FLGS = -Wall -Wextra -Werror
 all: $(NAME)
 
 $(NAME):
-	gcc -c $(FLGS) $(SRCS) -I
+	gcc -c $(FLGS) $(SRCS)
 	ar rcs $(NAME) $(OBJS)
 
 clean:
