@@ -6,7 +6,7 @@
 /*   By: altikka <altikka@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/17 15:43:17 by altikka           #+#    #+#             */
-/*   Updated: 2022/01/06 14:48:26 by altikka          ###   ########.fr       */
+/*   Updated: 2022/01/11 15:08:59 by altikka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,6 @@ static int	read_buffer(int const fd, char **line, char **arr)
 			arr[fd] = ft_strdup(temp);
 			return (1);
 		}
-		if (*line == NULL)
-			*line = ft_strdup(buf);
 		else
 			buffer_to_line(line, buf);
 		ft_bzero(buf, BUFF_SIZE + 1);
