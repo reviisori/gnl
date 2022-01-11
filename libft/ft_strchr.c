@@ -6,7 +6,7 @@
 /*   By: altikka <altikka@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 16:41:00 by altikka           #+#    #+#             */
-/*   Updated: 2022/01/11 14:52:55 by altikka          ###   ########.fr       */
+/*   Updated: 2022/01/11 15:30:17 by altikka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,24 +15,13 @@
 char	*ft_strchr(char const *s, int c)
 {
 	char	*ptr;
-	size_t	i;
 
-	ptr = ((char *) NULL);
-	i = 0;
-	if (c == '\0')
+	ptr = (char *) s;
+	while (*ptr != c)
 	{
-		i = ft_strlen(s);
-		ptr = ((char *) &s[i]);
-		return (ptr);
-	}
-	while (s[i] != '\0')
-	{
-		if (s[i] == c)
-		{
-			ptr = ((char *) &s[i]);
-			return (ptr);
-		}
-		i++;
+		if (*ptr == '\0')
+			return ((char *) NULL);
+		ptr++;
 	}
 	return (ptr);
 }
